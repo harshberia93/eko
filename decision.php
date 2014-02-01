@@ -10,22 +10,16 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+		
 	</head>
 
 	<body>
 		<div class="container-fluid">
-			<div class="row-fluid">
-				<div class="span6 offset3">
-					<ul class="nav nav-tabs">
-						<li style="padding-right: 10%"><a href="node.php">Node</a></li>
-						<li style="padding-right: 10%"><a href="graph.php">Graph</a></li>
-						<li class="active"><a href="#">Decision</a></li>
-					</ul>
-				</div>
+		<?php 
+			include 'navbar.html'
+		?>
 
+			<div class="row-fluid">
 				<div class="span6 offset3">
 					<table border="1">
 						<tr>
