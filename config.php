@@ -1,5 +1,4 @@
 <?php
-	$con = mysql_connect('127.0.1.1','root','0273');
-	
-	$db = mysql_select_db('eko_spats');
+	$con = mysql_connect('mysql2.alwaysdata.com','spats','spatscjj');
+	$db = mysql_select_db('spats_eko');
 ?>
