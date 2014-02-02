@@ -11,44 +11,29 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+		<title>Add node</title>
+
 	</head>
 
 	<body>
-		<div class="container-fluid">
-			<div class="row-fluid">
+		<div class="container">
+			<div class="row">
 
-				<div class="span6 offset3">
-					<ul class="nav nav-tabs">
-						<li style="padding-right: 10%" class="active"><a href="node.php">Node</a></li>
-						<li style="padding-right: 10%"><a href="graph.php">Graph</a></li>
-						<li><a href="decision.php">Decision</a></li>
-					</ul>
-				</div>
-
-				<div class="span6 offset3">
-					<h2 class="text-center">Node</h2>
-					<ul class="nav nav-tabs">
-						<li class="active" style="padding-right: 10%"><a href="add_node.php">Add a Node</a></li>
-						<li style="padding-right: 10%"><a href="edit_node.php">Edit a Node</a></li>
-						<li><a href="delete_node.php">Delete a Node</a></li>
-					</ul>
-				</div>
-
+				<?php
+					include 'navbar.html'
+				?>
 				<div class="span6 offset3">
 					<form action="#check" method="post" class="form-horizontal">
 						
-						<div class="control-group">
-							<label class="control-label">Name</label>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Name</label>
 							<div class="controls">
 								<input type="text" name="name" placeholder="Name of Node" required />
 							</div>
 						</div>
 
-						<div class="control-group">
-							<label class="control-label">Type of Soil</label>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Type of Soil</label>
 							<div class="controls">
 								<select id="soil" name="soil">
 									<option>Soil 1</option>
@@ -66,13 +51,13 @@
 								</select>
 							</div>
 							<br>
-							<label class="control-label">Field Capacity (%)</label>
+							<label class="control-label col-sm-2">Field Capacity (%)</label>
 							<div class="controls">
 								<input type="text" name="fc" placeholder="Field Capacity" value="34" readonly required />
 								<span class="lead" style="color: red; margin-left: 10px;"><?php echo $_GET['fc']?></span>
 							</div>
 							<br>
-							<label class="control-label">Permanent Wilting Point (%)</label>
+							<label class="control-label col-sm-2">Permanent Wilting Point (%)</label>
 							<div class="controls">
 								<input type="text" name="pwp" placeholder="Permanent Wilting Point" value="16" readonly required />
 								<span class="lead" style="color: red; margin-left: 10px;"></span>
@@ -81,16 +66,16 @@
 
 
 
-						<div class="control-group">
-							<label class="control-label">Phone Number</label>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Phone Number</label>
 							<div class="controls">
 								<input type="text" name="phone" placeholder="10 Digit Phone Number" required />
 								<span class="lead" style="color: red; margin-left: 10px;"></span>
 							</div>
 						</div>
 
-						<div class="control-group">
-							<label class="control-label">Crop Name</label>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Crop Name</label>
 							<div class="controls">
 								<select name="crop">
 									<option>Rice</option>
@@ -101,8 +86,8 @@
 							</div>
 						</div>
 
-						<div class="control-group">
-							<label class="control-label">Number of Ports</label>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Number of Ports</label>
 							<div class="controls">
 								<select name="port" id="port">
 									<option>1</option>
@@ -113,32 +98,32 @@
 							</div>
 						</div>
 
-						<div class="control-group" id="port1">
-							<label class="control-label">Depth of Port 1 (cm)</label>
+						<div class="form-group" id="port1">
+							<label class="control-label col-sm-2">Depth of Port 1 (cm)</label>
 							<div class="controls">
 								<input type="text" name="port1" placeholder="Depth at Port 1" />
 								<span class="lead" style="color: red; margin-left: 10px;"></span>
 							</div>
 						</div>
 
-						<div class="control-group" id="port2" style="display: none;">
-							<label class="control-label">Depth of Port 2 (cm)</label>
+						<div class="form-group" id="port2" style="display: none;">
+							<label class="control-label col-sm-2">Depth of Port 2 (cm)</label>
 							<div class="controls">
 								<input type="text" name="port2" placeholder="Depth at Port 2" />
 								<span class="lead" style="color: red; margin-left: 10px;"></span>
 							</div>
 						</div>
 
-						<div class="control-group" id="port3" style="display: none;">
-							<label class="control-label">Depth of Port 3 (cm)</label>
+						<div class="form-group" id="port3" style="display: none;">
+							<label class="control-label col-sm-2">Depth of Port 3 (cm)</label>
 							<div class="controls">
 								<input type="text" name="port3" placeholder="Depth at Port 3" />
 								<span class="lead" style="color: red; margin-left: 10px;"></span>
 							</div>
 						</div>
 
-						<div class="control-group" id="port4" style="display: none;">
-							<label class="control-label">Depth of Port 4 (cm)</label>
+						<div class="form-group" id="port4" style="display: none;">
+							<label class="control-label col-sm-2">Depth of Port 4 (cm)</label>
 							<div class="controls">
 								<input type="text" name="port4" placeholder="Depth at Port 4" />
 								<span class="lead" style="color: red; margin-left: 10px;"></span>
@@ -308,3 +293,11 @@
 		}
 	}
 ?>
+
+
+		<style type='text/css'>
+			.form-horizontal .control-label {
+				    text-align: left;
+				    
+				}
+		</style>
