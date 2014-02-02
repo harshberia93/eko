@@ -102,7 +102,7 @@ Irrigation applied should be : $ad mm
 									}
 									
 									//mail("nsr@agfe.iitkgp.ernet.in", "Soil Moisture Content Report", $content);
-									mail("harsh.beria93@gmail.com", "Soil Moisture Content Report", $content);
+									//mail("harsh.beria93@gmail.com", "Soil Moisture Content Report", $content);
 								}
 
 								echo "<tr>";
