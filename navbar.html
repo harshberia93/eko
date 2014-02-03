@@ -27,7 +27,10 @@
 
 		</nav>
 <link href="static/css/bootstrap.css" rel="stylesheet">
+<link href="static/css/jquery-ui.css" rel="stylesheet">
+
 <script type="text/javascript" src="static/js/jQuery-v1.10.2.js"></script>
+<script type="text/javascript" src="static/js/jquery-ui.js"></script>
 <script type="text/javascript" src="static/js/bootstrap.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -39,5 +42,46 @@ $(document).ready(function(){
 			$('.dropdown-menu').slideUp().delay(400)
 		}
 	);
+
+	$("#startDate").datepicker({
+	    trigger: "#button"
+
+	})
+	$("#endDate").datepicker2({
+		 trigger:"#endDatePicker"
+	})
+
+	
+	$("#startDate").datepicker2({
+    	trigger: "#startDatePicker"
+	});
+
+	$("#plotGraph").click(function(e){
+		e.preventDefault()
+	
+		$.ajax({
+			type: "POST",
+			url: "some.php",
+			data: $("#plotDetailForm").serialize()
+		})
+		.done(function( msg ) {
+			alert(  msg );
+		});
+	})
 })
+$.widget("ui.datepicker2", {
+    _init: function() {
+        var $el = this.element;
+        $el.datepicker(this.options);
+        
+        if (this.options && this.options.trigger) {
+            $(this.options.trigger).bind("click", function () {
+                $el.datepicker("show");
+            });
+        }
+    }
+});
+
+
+
 </script>
