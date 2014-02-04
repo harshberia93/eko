@@ -17,33 +17,35 @@
   
   <style type="text/css">
 
+  li{
+    text-decoration:none;
+  }
   .custom-btn{
     width:100%;
     background-color: #59407F;
     color:#fff;
   }
 
-    .axis path,
-    .axis line {
-      fill: none;
-      stroke: #000;
-      shape-rendering: crispEdges;
-    }
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+/*
+  .x.axis path {
+    display: none;
+  }
+*/
+  .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
 
-    .x.axis path {
-      display: none;
-    }
-
-    .line {
-      fill: none;
-      stroke: 'steelblue';
-      stroke-width: 1.5px;
-    }
-
-
-    .date-icon{
-      margin-left: -25px;
-    }
+  .date-icon{
+    margin-left: -25px;
+  }
   </style>
   </head>
   <body>
@@ -73,32 +75,39 @@
         </div>
         <div class="row">
           <div class="col-md-2">Node</div>
-          <div class="col-md-2"><input type="radio" name="node" value="node1" id="node1"><label for="node1">Node1</label></div>
-          <div class="col-md-2"><input type="radio" name="node" value="node2" id="node2"><label for="node2">Node2</label></div>
-          <div class="col-md-2"><input type="radio" name="node" value="node3" id="node3"><label for="node3">node3</label></div>
-          <div class="col-md-2"><input type="radio" name="node" value="node4" id="node4"><label for="node4">node4</label></div>
+          <div class="col-md-2"><input type="radio" name="node" value="4" id="node1"><label for="node1">Node1</label></div>
+          <div class="col-md-2"><input type="radio" name="node" value="5" id="node2"><label for="node2">Node2</label></div>
+          <div class="col-md-2"><input type="radio" name="node" value="6" id="node3"><label for="node3">node3</label></div>
+          <div class="col-md-2"><input type="radio" name="node" value="7" id="node4"><label for="node4">node4</label></div>
           <div class="col-md-2"></div>
         </div>
-        <div class="row">
-          <div class="col-md-2">Node</div>
-          <div class="col-md-2"><input type="checkbox" name="port" value="portA" id="portA"><label for="portA">portA</label></div>
-          <div class="col-md-2"><input type="checkbox" name="port" value="portB" id="portB"><label for="portB">portB</label></div>
-          <div class="col-md-2"><input type="checkbox" name="port" value="portC" id="portC"><label for="portC">portC</label></div>
-          <div class="col-md-2"><input type="checkbox" name="port" value="portD" id="portD"><label for="portD">portD</label></div>
-        </div>
+        
         <div class="row">
           <div class="col-md-2"><button class="custom-btn btn btn-sm" id="plotGraph"><b>Plot Graph</b></button></div>
           <div class="col-md-10"></div>
         </div>
       </form>
-
+      <div class="row">
+        <div class="col-md-10">
+          <svg id="graph"></svg>
+         </div> 
+        <div class="col-md-2">
+          <ul class="list-style">
+            <li><input type="checkbox" name="port" value="port_1" id="portA"><label for="portA">portA</label></li>
+            <li><input type="checkbox" name="port" value="port_2" id="portB"><label for="portB">portB</label></li>
+            <li><input type="checkbox" name="port" value="port_3" id="portC"><label for="portC">portC</label></li>
+            <li><input type="checkbox" name="port" value="port_4" id="portD"><label for="portD">portD</label></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </body>
 </html>
 
 <script src="http://d3js.org/d3.v3.js"></script>
-<script>
 
+<script>
+/*
 var margin = {top: 20, right: 80, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -126,11 +135,12 @@ var line = d3.svg.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.rainfall); });
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+var svg = d3.select("#graph").append("svg")
+    .attr("width", '100%' )
+    .attr("height", '500' )
+    .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
 d3.tsv("data1.tsv", function(error, data) {
   color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
@@ -189,4 +199,122 @@ d3.tsv("data1.tsv", function(error, data) {
       .attr("dy", ".35em")
       .text(function(d) { return d.name; });
 });
+*/
+</script>
+
+<script>
+$redraw_graph = function($sampleData){
+
+  $("svg").empty()
+      var margin = {top: 20, right: 20, bottom: 30, left: 50},
+          width = 960 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
+      var parseDate = d3.time.format("%Y-%m-%d").parse;
+
+      var x = d3.time.scale()
+          .range([0, width])
+
+      var y = d3.scale.linear()
+          .range([ height,0]);
+
+      var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient("bottom");
+
+      var yAxis = d3.svg.axis()
+          .scale(y)
+          .orient("left");
+      /*    
+      var line = d3.svg.line()
+          .interpolate("basis")
+          .x(function(d) { return x(d.time); })
+          .y(function(d) { return y(d.value); });    
+      */
+      var line1 = d3.svg.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.port1); });
+
+      var line2 = d3.svg.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.port2); });
+
+      var line3 = d3.svg.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.port3); });
+      
+      var line4 = d3.svg.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.port4); });
+
+      var svg = d3.select("#graph")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var data = $sampleData.map(function(d) {
+            return {
+               date: parseDate(d["date"]),
+               port1: d["port1"],
+               port2:d["port2"],
+               port3:d["port3"],
+               port4:d["port4"]
+            };
+            
+        });
+
+        console.log(data);
+
+
+        x.domain(d3.extent(data, function(d) { return d.date; }));
+        y.domain([0,d3.max(data, function(d) { 
+              temp_array = [d.port1,d.port2,d.port3,d.port4]
+              return Math.max.apply(Math, temp_array); 
+            })]
+            
+          );
+        
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+          .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("rainfall (%)");
+
+        svg.append("path")
+            .datum(data)
+            .attr("class", "line")
+            .attr("id","plot_portA")
+            .attr("d", line1);
+
+          svg.append("path")      // Add the valueline2 path.
+            .attr("class", "line")
+            .attr("d", line2(data))
+            .attr("id","plot_portB")
+            .style('stroke','red');
+
+          svg.append("path")      // Add the valueline2 path.
+            .attr("class", "line")
+            .attr("d", line3(data))
+            .attr("id","plot_portC")
+            .style('stroke','black');
+
+          svg.append("path")      // Add the valueline2 path.
+            .attr("class", "line")
+            .attr("d", line4(data))
+            .attr("id","plot_portD")
+            .style('stroke','orange');
+
+}
+
+
 </script>

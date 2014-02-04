@@ -43,32 +43,45 @@ $(document).ready(function(){
 		}
 	);
 
-	$("#startDate").datepicker({
-	    trigger: "#button"
-
+	$("#startDate").datepicker2({
+	    trigger: "#startDatePicker",
+	    dateFormat: 'yy-mm-dd' 
 	})
 	$("#endDate").datepicker2({
-		 trigger:"#endDatePicker"
+		 trigger:"#endDatePicker",
+		 dateFormat: 'yy-mm-dd' 
 	})
 
 	
-	$("#startDate").datepicker2({
-    	trigger: "#startDatePicker"
-	});
-
+	
 	$("#plotGraph").click(function(e){
 		e.preventDefault()
-	
 		$.ajax({
 			type: "POST",
-			url: "some.php",
+			url: "readings.php",
 			data: $("#plotDetailForm").serialize()
 		})
 		.done(function( msg ) {
-			alert(  msg );
+			$sampleData = $.parseJSON(msg);
+			if($sampleData){
+				$redraw_graph($sampleData)    
+			}
+			$("input:checkbox").prop("checked",true)  
 		});
 	})
+
+
+	$("input:checkbox").change(function(){
+		$id = $(this).prop("id")
+		if($(this).prop("checked")==true){
+			$("#plot_"+$id).show();
+		}else{
+			$("#plot_"+$id).hide();
+		}
+	})
+
 })
+
 $.widget("ui.datepicker2", {
     _init: function() {
         var $el = this.element;
