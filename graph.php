@@ -91,7 +91,7 @@
         <div class="col-md-10">
           <svg id="graph"></svg>
          </div> 
-        <div class="col-md-2">
+        <div class="col-md-2 boxes">
           <ul class="list-style">
             <li><input type="checkbox" name="port" value="port_1" id="portA"><label for="portA">portA</label></li>
             <li><input type="checkbox" name="port" value="port_2" id="portB"><label for="portB">portB</label></li>

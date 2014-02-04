@@ -34,7 +34,7 @@
 <script type="text/javascript" src="static/js/bootstrap.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	
+	$(".boxes").hide()	
 	$( "#node-btn" ).hover(
 		function() {
 			$('.dropdown-menu').slideDown().delay(400)
@@ -68,6 +68,7 @@ $(document).ready(function(){
 			}
 			$("input:checkbox").prop("checked",true)  
 		});
+		$(".boxes").show()
 	})
 
 
