@@ -26,8 +26,12 @@
 							<th>Day</th>
 							<th>Port 1</th>
 							<th>Port 2</th>
+							<th>Port 3</th>
+							<th>Port 4</th>
 							<th>SMD, mm for Port 1</th>
 							<th>SMD, mm for Port 2</th>
+							<th>SMD, mm for Port 3</th>
+							<th>SMD, mm for Port 4</th>
 							<th>Total SMD, mm</th>
 						</tr>
 						<?php
@@ -43,6 +47,8 @@
 							$id_plot_inf = $row['id'];
 							$depth_p1 = $row['port1']; // Depth of Port 1
 							$depth_p2 = $row['port2']; // Depth of Port 2
+							$depth_p3 = $row['port3']; // Depth of Port 1
+							$depth_p4 = $row['port4']; // Depth of Port 2
 							$fc = $row['fc']; // Field Capacity
 							$pwp = $row['pwp']; // Permanent Wilting Point
 
@@ -52,6 +58,8 @@
 								$date = $row['date'];
 								$p1 = $row['port1']; // Moisture reading at port 1 in percent
 								$p2 = $row['port2']; // Moisture reading at port 2 in percent
+								$p3 = $row['port3']; // Moisture reading at port 3 in percent
+								$p4 = $row['port4']; // Moisture reading at port 4 in percent
 
 								$mad = 50; // Maximum allowable Depletion is 50%
 								$ad = ($fc - $pwp) * 45 / 10; // Allowable moisture depletion in mm. Here 45 represents the root depth in cm
@@ -59,7 +67,9 @@
 
 								$smd1 = ($fc - $p1)*$depth_p1/10; // Soil Moisture Depletion for port 1 in mm
 								$smd2 = ($fc - $p2)*$depth_p2/10; // Soil Moisture Depletion for port 2 in mm
-								$smd = $smd1 + $smd2; // Total Soil Moisture Depletion
+								$smd3 = ($fc - $p3)*$depth_p3/10; // Soil Moisture Depletion for port 1 in mm
+								$smd4 = ($fc - $p4)*$depth_p4/10; // Soil Moisture Depletion for port 2 in mm
+								$smd = $smd1 + $smd2 + $smd3 + $smd4; // Total Soil Moisture Depletion
 
 								$day = date('d', strtotime($date));
 								if ($day == $day_three_months_ago) {
@@ -103,8 +113,12 @@ Irrigation applied should be : $ad mm
 								echo "<td style='padding: 5px 5px 5px 5px;'>$date</td>";
 								echo "<td style='padding: 5px 5px 5px 5px;'>$p1</td>";
 								echo "<td style='padding: 5px 5px 5px 5px;'>$p2</td>";
+								echo "<td style='padding: 5px 5px 5px 5px;'>$p3</td>";
+								echo "<td style='padding: 5px 5px 5px 5px;'>$p4</td>";
 								echo "<td style='padding: 5px 5px 5px 5px;'>$smd1</td>";
 								echo "<td style='padding: 5px 5px 5px 5px;'>$smd2</td>";
+								echo "<td style='padding: 5px 5px 5px 5px;'>$smd3</td>";
+								echo "<td style='padding: 5px 5px 5px 5px;'>$smd4</td>";
 								echo "<td style='padding: 5px 5px 5px 5px;'>$smd</td>";
 								echo "</tr>";
 							}
